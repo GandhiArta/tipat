@@ -1,27 +1,23 @@
 from ultralytics import YOLO
 
 if __name__ == '__main__':
-    # 1. Load Pretrained YOLOv8 Nano
-    model = YOLO('yolov8n.pt')
+    # 1. Gunakan model yolov8s.pt (Small) untuk kapasitas fitur lebih tinggi
+    model = YOLO('yolov8s.pt')
 
-    # 2. Training dengan Konfigurasi Optimal
-    results = model.train(
-        data='Ketupat.v2i.yolov8/data.yaml',  # Path ke file data.yaml
-        epochs=100,                            # Ditingkatkan agar konvergensi optimal
-        patience=20,                           # Early stopping jika tidak ada peningkatan dalam 20 epoch
-        imgsz=640,                             # Resolusi standar YOLOv8
-        batch=16,                              # Ukuran batch stabil untuk GPU
-        device=0,                              # GPU NVIDIA
-        workers=4,                             # Mempercepat pembacaan dataset
-        seed=42,                               # Menjaga konsistensi eksperimen (reproducible)
-        optimizer='SGD',                       # Optimizer standar yang stabil
-        lr0=0.01,                              # Learning rate awal
-        plots=True,                            # Menyimpan grafik evaluasi (mAP, Loss, Confusion Matrix)
-        save=True,                             # Menyimpan bobot checkpoint
-        name='yolov8_ketupat_optimal'          # Nama folder hasil eksport
+    # 2. Jalankan pelatihan optimal
+    model.train(
+        data='Ketupat.v2i.yolov8/data.yaml',
+        epochs=100,             # Jumlah epoch ditingkatkan
+        imgsz=800,              # Resolusi 800 agar detail tekstur janur jelas
+        batch=8,                # Sesuaikan dengan VRAM GPU
+        device='cpu',               # Menggunakan GPU RTX
+        patience=20,            # Early stopping jika tidak ada peningkatan
+        
+        # Augmentasi Khusus Deteksi Objek Berdekatan
+        mosaic=1.0,             # Menggabungkan 4 gambar agar belajar mendeteksi objek bergelombol
+        degrees=15.0,           # Augmentasi rotasi
+        hsv_v=0.4,              # Augmentasi pencahayaan
+        scale=0.5,              # Variasi skala dekat/jauh
+        
+        name='yolov8_ketupat_v3' # Nama folder hasil training baru
     )
-
-    # 3. Validasi Akhir pada Split Validation
-    metrics = model.val()
-    print(f"mAP@50: {metrics.box.map50:.4f}")
-    print(f"mAP@50-95: {metrics.box.map:.4f}")
