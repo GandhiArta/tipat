@@ -22,12 +22,10 @@ st.markdown("Aplikasi Pengolahan Citra Digital berbasis **Deep Learning (YOLOv8)
 # ==========================================
 @st.cache_resource
 def load_yolo_model():
-    # Daftar prioritas lokasi file best.pt hasil training GPU kamu
     possible_paths = [
-        "runs/detect/yolov8_ketupat_v3/weights/best.pt",
-        "runs/detect/yolov8_ketupat_optimal/weights/best.pt",
-        "best.pt",
-        "weights/best.pt"
+        "runs/detect/yolov8_ketupat_optimal/weights/best.pt",  # Model lama yang aktif
+        "runs/detect/yolov8_ketupat_v3-2/weights/best.pt",
+        "best.pt"
     ]
     
     for path in possible_paths:
@@ -35,7 +33,6 @@ def load_yolo_model():
             return YOLO(path), path
             
     return None, None
-
 yolo_model, model_path = load_yolo_model()
 
 # Memastikan hanya model buatanmu yang digunakan

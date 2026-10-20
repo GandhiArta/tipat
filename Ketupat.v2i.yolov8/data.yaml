@@ -1,13 +1,13 @@
-train: train/images
-val: valid/images
-test: test/images
+train: ../train/images
+val: ../valid/images
+test: ../test/images
 
 nc: 4
 names: ['Tipat Bantal', 'Tipat Dampulan', 'Tipat Gong', 'Tipat Nasi']
 
 roboflow:
-  workspace: pelinggih-khexa
-  project: ketupat-zce5v
+  workspace: i-made-gandhi-artadana-putra
+  project: ketupat-zce5v-stsap
   version: 2
   license: CC BY 4.0
-  url: https://universe.roboflow.com/pelinggih-khexa/ketupat-zce5v/dataset/2
+  url: https://universe.roboflow.com/i-made-gandhi-artadana-putra/ketupat-zce5v-stsap/dataset/2
