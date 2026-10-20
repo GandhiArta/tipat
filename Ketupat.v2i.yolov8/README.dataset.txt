@@ -1,5 +1,5 @@
-# Ketupat > 2026-10-20 12:58pm
-https://universe.roboflow.com/i-made-gandhi-artadana-putra/ketupat-zce5v-stsap
+# Ketupat > 2025-07-02 10:36am
+https://universe.roboflow.com/pelinggih-khexa/ketupat-zce5v
 
 Provided by a Roboflow user
 License: CC BY 4.0
